@@ -41,16 +41,15 @@ const insertItems = `INSERT INTO inventory (item, category, quantity, price)
     `;
 
     async function main() {
-        try {
-            const environment = process.env.NODE_ENV;
-            const connectionString = environment === 'production' 
-            ? process.env.DATABASE_URL_PROD
-            : process.env.DATABASE_URL_LOCAL;   
+        
+            const connectionString = process.env.DATABASE_URL_PROD
+;   
 
             const client = new Client({
                 connectionString,
-                ssl: environment === 'production' ? {rejectUnauthorized: false} : false
-            })    
+                ssl: {rejectUnauthorized: false}
+            })
+        try {    
             await client.connect();
             await client.query(createSQLtable);
 
