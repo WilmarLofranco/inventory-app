@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const environment = process.env.NODE_ENV || 'development';
 const connectionString = environment === 'production' 
-    ? process.env.DATABASE_URL_PROD || DATABASE_URL
+    ? process.env.DATABASE_URL_PROD
     : process.env.DATABASE_URL_LOCAL;
 
 module.exports = new Pool ({
