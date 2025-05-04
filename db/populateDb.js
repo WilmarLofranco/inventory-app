@@ -42,7 +42,7 @@ const insertItems = `INSERT INTO inventory (item, category, quantity, price)
 
     async function main() {
         try {
-            const environment = process.env.NODE_ENV || 'development';
+            const environment = process.env.NODE_ENV;
             const connectionString = environment === 'production' 
             ? process.env.DATABASE_URL_PROD
             : process.env.DATABASE_URL_LOCAL;   
