@@ -2,12 +2,12 @@
   "name": "inventory-app",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node db/populateDb.js",
-    "start": "npm run seed && node --watch app.js",
-    "dev": "node --watch app.js"
-  },
+"scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "seed": "node db/populateDb.js",
+  "start": "node app.js",
+  "dev": "npm run seed && node --watch app.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
