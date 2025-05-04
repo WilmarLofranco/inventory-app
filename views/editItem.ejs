@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <%- include('./partial/nav.ejs') %>
+    <% if (errors && errors.length > 0) { %>
+        <ul>
+          <% errors.forEach((error) => { %>
+            <li><%= error.msg %></li>
+          <% }) %>
+        </ul>
+      <% } %>
+    <h1 style="text-align: center;"><%= title %></h1>
+    <form action="/edit/<%= item.id %>" method="POST" class="addForm">
+        <div class="formGroup" style="width: 70%;">
+        <label for="item">Item</label>
+        <input type="text" name="item" id="item" placeholder="Enter item name, brand, & model" 
+        value="<%= item.item %>" required>
+        </div>
+
+        <div class="formGroup">
+        <label for="category">Category</label>
+        <select name="category" id="category" required>
+            <option value="">-- Select Category --</option>
+            <option value="furniture" <%= item.category === 'furniture' ? 'selected' : '' %>>Furniture</option>
+            <option value="electronics" <%= item.category === 'electronics' ? 'selected' : '' %>>Electronics</option>
+            <option value="accessories" <%= item.category === 'accessories' ? 'selected' : '' %>>Accessories</option>
+            <option value="office supplies" <%= item.category === 'office supplies' ? 'selected' : '' %>>Office supplies</option>
+        </select>
+        </div>
+
+        <div class="formGroup">
+        <label for="quantity">Quantity</label>
+        <input type="number" name="quantity" id="quantity" value="<%= item.quantity %>" required>
+        </div>
+
+        <div class="formGroup">
+        <label for="price">Price</label>
+        <input type="number" step="0.01" name="price" id="price" value="<%= item.price %>" required>
+        </div>
+
+        <button type="submit" onclick="alert('Update Item Successful')">Update</button>
+    </form>
+</body>
+</html>

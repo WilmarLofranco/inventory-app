@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Inventory</title>
+</head>
+<body>
+    <%- include('./partial/nav.ejs') %>
+    <form action="/" method="GET" class="categories">
+        <button type="submit" name="category" value="all"><h3>All Items</h3></button>
+        <button type="submit" name="category" value="electronics"><h3>Electronics</h3></button>
+        <button type="submit" name="category" value="furniture"><h3>Furniture</h3></button>
+        <button type="submit" name="category" value="accessories"><h3>Accessories</h3></button>
+        <button type="submit" name="category" value="office supplies"><h3>Office Supplies</h3></button>
+
+    </form>
+        <% if (items.length === 0) { %>
+            <h2>No Items Yet</h2>
+        <% } else { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Item</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th style="text-align: center;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% items.forEach(item => { %>
+                <tr>
+                    <td><%= item.id %></td>
+                    <td><%= item.item %></td>
+                    <td><%= item.category %></td>
+                    <td><%= item.quantity %></td>
+                    <td>$<%= item.price%></td>
+                    <td>$ <%= (item.quantity * item.price).toFixed(2) %></td>
+                    <td style="white-space: nowrap; width: 1%;">
+                        <form action="/edit/<%= item.id %>  " method="GET" style="display: inline;">
+                            <button type="submit">Edit</button>
+                        </form>
+                        <form action="/delete/<%= item.id %>" method="POST" style="display: inline;">
+                            <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                        
+                    </td>
+                </tr>
+                <% }) %> 
+            </tbody>
+        </table>
+        <% } %>
+    
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <%- include('./partial/nav.ejs') %>
+    <h1 style="padding-left: 20px; margin-bottom: 0; text-align: center;"><%= title %></h1>
+    <form action="/search" method="GET" style="text-align: center;">
+        <label for="id" style="padding-left: 20px;">ID</label>
+        <input type="number" name="id" id="id" placeholder="Enter item id">
+
+        <label for="item" style="padding-left: 20px">Item</label>
+        <input type="text" name="item" id="item" placeholder="Enter item name">
+
+        <label for="category" style="padding-left: 20px">Category</label>
+        <select name="category" id="category">
+            <option value="">-- Select Category --</option>
+            <option value="furniture">Furniture</option>
+            <option value="electronics">Electronics</option>
+            <option value="accessories">Accessories</option>
+            <option value="office supplies">Office supplies</option>
+        </select>
+
+        <button type="submit" style="margin-left: 20px; padding: 10px 40px;">Search</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Item</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th style="text-align: center;">Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <tr>
+                <% if (!items ||items.length === 0) { %>
+                    <td><h2 style="padding-left: 20px; margin: 0;">No Results</h2></td>
+                <% } else { %>
+                    <% items.forEach(item => { %>
+                <td><%= item.id %></td>
+                <td><%= item.item %></td>
+                <td><%= item.category %></td>
+                <td><%= item.quantity %></td>
+                <td>$<%= item.price %></td>
+                <td>$ <%= (item.quantity * item.price).toFixed(2) %></td>
+                <td style="white-space: nowrap; width: 1%;">
+                    <form action="/edit/<%= item.id %>  " method="GET" style="display: inline;">
+                        <button type="submit">Edit</button>
+                    </form>
+                    <form action="/delete/<%= item.id %>" method="POST" style="display: inline;">
+                        <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            <% }) %> 
+        </tbody>
+    </table>
+    <% } %>
+
+</body>
+</html>
